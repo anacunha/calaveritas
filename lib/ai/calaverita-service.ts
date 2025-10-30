@@ -58,6 +58,9 @@ export class CalaveritaService {
 
   constructor(config?: Partial<CalaveritaServiceConfig>) {
     this.config = { ...DEFAULT_CONFIG, ...config };
+    console.log(
+      `[CalaveritaService] Initialized with model: ${this.config.model}, testMode: ${this.config.testMode}`
+    );
   }
 
   /**
@@ -81,6 +84,12 @@ export class CalaveritaService {
     attempt: number
   ): Promise<ReadableStream<string>> {
     try {
+      console.log(
+        `[CalaveritaService] Generating calaverita for "${
+          input.petName
+        }" with model: ${this.config.model} (attempt ${attempt + 1})`
+      );
+
       // Convertir imagen a base64
       const imageBase64 = this.convertImageToBase64(
         input.imageBuffer,
@@ -96,6 +105,10 @@ export class CalaveritaService {
 
       // Generar calaverita con streaming y timeout
       const result = await this.generateWithTimeout(userPrompt);
+
+      console.log(
+        `[CalaveritaService] Successfully generated calaverita for "${input.petName}"`
+      );
 
       return result.textStream;
     } catch (error) {
