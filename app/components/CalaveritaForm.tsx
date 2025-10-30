@@ -235,7 +235,7 @@ export default function CalaveritaForm({
         <div>
           <label
             htmlFor="petName"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="block font-display text-sm sm:text-base font-bold text-[#2d1b2e] mb-2 uppercase tracking-wide"
           >
             Nombre de tu mascota
           </label>
@@ -245,7 +245,7 @@ export default function CalaveritaForm({
             value={formState.petName}
             onChange={handleNameChange}
             disabled={isPending}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+            className="w-full px-4 py-3 sm:py-4 font-display text-base sm:text-lg bg-white border-[3px] border-[#2d1b2e] focus:outline-none focus:border-[#a91a8a] focus:shadow-[2px_2px_0px_#a91a8a] sm:focus:shadow-[4px_4px_0px_#a91a8a] disabled:bg-gray-100 disabled:cursor-not-allowed transition-shadow duration-100 placeholder:text-[#5a3a5c]"
             placeholder="Ej: Firulais"
             maxLength={50}
           />
@@ -253,16 +253,16 @@ export default function CalaveritaForm({
 
         {/* Selector de rasgos */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block font-display text-sm sm:text-base font-bold text-[#2d1b2e] mb-2 uppercase tracking-wide">
             Rasgos de personalidad (selecciona {MIN_TRAITS}-{MAX_TRAITS})
           </label>
-          <div className="space-y-4">
+          <div className="space-y-4 sm:space-y-5">
             {(Object.keys(PET_TRAITS) as TraitCategory[]).map((category) => (
               <div key={category}>
-                <h3 className="text-xs font-semibold text-gray-600 uppercase mb-2">
+                <h3 className="font-display text-xs sm:text-sm font-bold text-[#5a3a5c] uppercase tracking-wider mb-2 sm:mb-3">
                   {category}
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {PET_TRAITS[category].map((trait) => {
                     const isSelected = formState.selectedTraits.includes(
                       trait.value
@@ -273,11 +273,11 @@ export default function CalaveritaForm({
                         type="button"
                         onClick={() => handleTraitToggle(trait.value)}
                         disabled={isPending}
-                        className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                        className={`min-h-[44px] px-4 py-2 sm:px-5 sm:py-3 font-display text-sm sm:text-base font-bold border-[3px] border-[#2d1b2e] transition-all duration-100 ${
                           isSelected
-                            ? "bg-purple-600 text-white"
-                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                        } disabled:opacity-50 disabled:cursor-not-allowed`}
+                            ? "bg-[#a91a8a] text-white shadow-[2px_2px_0px_#2d1b2e] sm:shadow-[3px_3px_0px_#2d1b2e]"
+                            : "bg-white text-[#2d1b2e] shadow-[2px_2px_0px_#2d1b2e] hover:bg-[#fcefe8]"
+                        } active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#2d1b2e] disabled:opacity-50 disabled:cursor-not-allowed`}
                       >
                         {trait.label}
                       </button>
@@ -287,7 +287,7 @@ export default function CalaveritaForm({
               </div>
             ))}
           </div>
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="font-display text-xs sm:text-sm text-[#5a3a5c] mt-2">
             Seleccionados: {formState.selectedTraits.length}/{MAX_TRAITS}
           </p>
         </div>
@@ -296,7 +296,7 @@ export default function CalaveritaForm({
         <div>
           <label
             htmlFor="image"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="block font-display text-sm sm:text-base font-bold text-[#2d1b2e] mb-2 uppercase tracking-wide"
           >
             Foto de tu mascota
           </label>
@@ -306,20 +306,21 @@ export default function CalaveritaForm({
             accept="image/jpeg,image/png,image/webp"
             onChange={handleImageChange}
             disabled={isPending}
-            className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full text-sm sm:text-base text-[#2d1b2e] font-display file:mr-3 sm:file:mr-4 file:py-3 file:px-5 sm:file:px-6 file:min-h-[44px] file:font-display file:font-bold file:border-[3px] file:border-[#2d1b2e] file:bg-[#e1611a] file:text-white file:shadow-[2px_2px_0px_#2d1b2e] sm:file:shadow-[3px_3px_0px_#2d1b2e] file:cursor-pointer hover:file:bg-[#c54e15] hover:file:shadow-[3px_3px_0px_#2d1b2e] sm:hover:file:shadow-[4px_4px_0px_#2d1b2e] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-100"
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="font-display text-xs sm:text-sm text-[#5a3a5c] mt-1">
             Formatos: JPEG, PNG, WebP. Máximo 5MB
           </p>
 
           {/* Preview de imagen */}
           {formState.imagePreview && (
-            <div className="mt-4">
+            <div className="mt-4 inline-block border-[3px] border-[#2d1b2e] shadow-[2px_2px_0px_#2d1b2e] sm:shadow-[4px_4px_0px_#2d1b2e] bg-white p-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={formState.imagePreview}
-                alt="Preview"
-                className="w-full max-w-xs rounded-lg shadow-md"
+                alt="Preview de tu mascota"
+                className="max-w-full sm:max-w-xs w-full h-auto"
+                style={{ imageRendering: "auto" }}
               />
             </div>
           )}
@@ -329,22 +330,32 @@ export default function CalaveritaForm({
         <button
           type="submit"
           disabled={isPending}
-          className="w-full bg-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-purple-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="w-full min-h-[56px] py-4 px-6 font-display text-base sm:text-lg font-bold bg-[#a91a8a] text-white border-[3px] border-[#2d1b2e] shadow-[3px_3px_0px_#2d1b2e] sm:shadow-[4px_4px_0px_#2d1b2e] hover:bg-[#8a1570] hover:shadow-[4px_4px_0px_#2d1b2e] sm:hover:shadow-[6px_6px_0px_#2d1b2e] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_#2d1b2e] disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-100"
         >
-          {isPending ? "Generando calaverita..." : "Generar Calaverita"}
+          {isPending ? "⏳ Generando..." : "🎃 Generar Calaverita"}
         </button>
 
         {/* Mensajes de error */}
         {formState.error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-            <p className="text-red-800 text-sm">{formState.error}</p>
+          <div className="bg-red-50 border-[3px] border-red-600 shadow-[2px_2px_0px_#2d1b2e] sm:shadow-[4px_4px_0px_#2d1b2e] p-3 sm:p-4">
+            <div className="flex items-start gap-2 sm:gap-3">
+              <span className="text-xl sm:text-2xl flex-shrink-0">⚠️</span>
+              <div className="flex-1">
+                <p className="font-display text-sm sm:text-base font-bold text-red-800 mb-1">
+                  Error
+                </p>
+                <p className="font-body text-sm sm:text-base text-red-700">
+                  {formState.error}
+                </p>
+              </div>
+            </div>
             {formState.generatedCalaverita && (
               <button
                 type="button"
                 onClick={handleRetry}
-                className="mt-2 text-red-600 text-sm font-medium hover:text-red-700"
+                className="mt-3 min-h-[44px] px-4 py-2 sm:px-5 sm:py-3 font-display text-sm sm:text-base font-bold bg-[#a91a8a] text-white border-[3px] border-[#2d1b2e] shadow-[2px_2px_0px_#2d1b2e] sm:shadow-[3px_3px_0px_#2d1b2e] hover:bg-[#8a1570] hover:shadow-[3px_3px_0px_#2d1b2e] sm:hover:shadow-[4px_4px_0px_#2d1b2e] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#2d1b2e] transition-all duration-100"
               >
-                Reintentar
+                🎃 Reintentar
               </button>
             )}
           </div>
@@ -352,19 +363,28 @@ export default function CalaveritaForm({
 
         {/* Indicador de carga */}
         {isPending && (
-          <div className="flex items-center justify-center space-x-2">
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-purple-600"></div>
-            <span className="text-gray-600">Generando tu calaverita...</span>
+          <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 py-6 sm:py-8">
+            <div className="relative w-12 h-12 sm:w-16 sm:h-16">
+              {/* Pixel-art style spinner */}
+              <div className="absolute inset-0 border-[3px] sm:border-[4px] border-[#2d1b2e] border-t-[#a91a8a] animate-spin"></div>
+            </div>
+            <p className="font-display text-sm sm:text-base text-[#5a3a5c]">
+              ⏳ Generando tu calaverita...
+            </p>
           </div>
         )}
 
         {/* Calaverita generada */}
         {formState.generatedCalaverita && (
-          <div className="bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 rounded-lg p-6">
-            <h3 className="text-lg font-bold text-purple-900 mb-3">
-              Tu Calaverita
-            </h3>
-            <div className="whitespace-pre-wrap text-gray-800 font-serif leading-relaxed">
+          <div className="bg-[#fcefe8] border-[3px] sm:border-[4px] border-[#2d1b2e] shadow-[3px_3px_0px_#2d1b2e] sm:shadow-[6px_6px_0px_#2d1b2e] p-4 sm:p-6 md:p-8">
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <span className="text-2xl sm:text-3xl">💀</span>
+              <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-[#a91a8a]">
+                Tu Calaverita
+              </h3>
+              <span className="text-2xl sm:text-3xl">💀</span>
+            </div>
+            <div className="font-display text-sm sm:text-base leading-relaxed text-[#2d1b2e] whitespace-pre-wrap">
               {formState.generatedCalaverita}
             </div>
           </div>

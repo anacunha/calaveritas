@@ -1,26 +1,228 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Code of the Dead Color Palette */
+  --color-primary: #a91a8a; /* Magenta/Pink - Main actions */
+  --color-primary-hover: #8a1570;
+  --color-secondary: #e1611a; /* Orange - Accents */
+  --color-secondary-hover: #c54e15;
+  --color-background: #f6e8f3; /* Light Pink - Main background */
+  --color-accent: #fcefe8; /* Peach - Secondary backgrounds */
+
+  /* Semantic Colors */
+  --color-text-primary: #2d1b2e; /* Dark purple for main text */
+  --color-text-secondary: #5a3a5c; /* Medium purple for secondary text */
+  --color-error: #d32f2f; /* Error states */
+  --color-success: #388e3c; /* Success states */
+
+  /* Typography System */
+  --font-display: var(
+    --font-silkscreen,
+    "Silkscreen",
+    monospace
+  ); /* Headings, buttons */
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif; /* Body text */
+
+  /* Type Scale */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.5rem; /* 40px */
+
+  /* Spacing Scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  /* Border Widths */
+  --border-thin: 2px;
+  --border-medium: 3px;
+  --border-thick: 4px;
+
+  /* Shadow Offsets */
+  --shadow-sm: 2px 2px 0px;
+  --shadow-md: 4px 4px 0px;
+  --shadow-lg: 6px 6px 0px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-text-primary);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Configure font families for Tailwind utilities */
+  --font-family-sans: var(--font-body);
+  --font-family-display: var(--font-silkscreen, "Silkscreen", monospace);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+}
+
+/* Font utility classes */
+.font-display {
+  font-family: var(--font-silkscreen, "Silkscreen", monospace) !important;
+}
+
+/* Apply Silkscreen to all headings and buttons by default */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: var(--font-silkscreen, "Silkscreen", monospace);
+}
+
+/* Ensure labels with font-display class use Silkscreen */
+label.font-display {
+  font-family: var(--font-silkscreen, "Silkscreen", monospace) !important;
+}
+
+/* Pixel-Art Utility Classes */
+.pixel-border {
+  border: 3px solid var(--color-text-primary);
+  border-radius: 0;
+  image-rendering: pixelated;
+}
+
+.pixel-shadow {
+  box-shadow: 4px 4px 0px var(--color-text-primary);
+}
+
+.pixel-shadow-sm {
+  box-shadow: 2px 2px 0px var(--color-text-primary);
+}
+
+.pixel-shadow-lg {
+  box-shadow: 6px 6px 0px var(--color-text-primary);
+}
+
+.pixel-button {
+  font-family: var(--font-display);
+  border: 3px solid var(--color-text-primary);
+  box-shadow: 4px 4px 0px var(--color-text-primary);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.pixel-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--color-text-primary);
+}
+
+.pixel-shadow-text {
+  text-shadow: 3px 3px 0px rgba(45, 27, 46, 0.3);
+}
+
+/* Responsive Utilities */
+@media (max-width: 640px) {
+  /* Reduce shadows on mobile for better performance and cleaner look */
+  .pixel-shadow {
+    box-shadow: 2px 2px 0px var(--color-text-primary);
+  }
+
+  .pixel-shadow-lg {
+    box-shadow: 3px 3px 0px var(--color-text-primary);
+  }
+
+  /* Ensure minimum touch target size */
+  button,
+  input[type="file"],
+  input[type="submit"],
+  [role="button"] {
+    min-height: 44px;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Comfortable spacing for tablets */
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1025px) {
+  /* Full pixel-art effects on desktop */
+  .pixel-shadow-lg {
+    box-shadow: 6px 6px 0px var(--color-text-primary);
+  }
+}
+
+/* Pixel-art animations */
+@keyframes pixel-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pixel-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes blink {
+  0%,
+  90%,
+  100% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+  }
+}
+
+.animate-pixel-pulse {
+  animation: pixel-pulse 2s ease-in-out infinite;
+}
+
+.animate-pixel-float {
+  animation: pixel-float 3s ease-in-out infinite;
+}
+
+.animate-sway {
+  animation: sway 4s ease-in-out infinite;
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
