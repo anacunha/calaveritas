@@ -377,16 +377,33 @@ export default function CalaveritaForm({
         {/* Calaverita generada */}
         {formState.generatedCalaverita && (
           <div className="bg-[#fcefe8] border-[3px] sm:border-[4px] border-[#2d1b2e] shadow-[3px_3px_0px_#2d1b2e] sm:shadow-[6px_6px_0px_#2d1b2e] p-4 sm:p-6 md:p-8">
-            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-              <span className="text-2xl sm:text-3xl">💀</span>
-              <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-[#a91a8a]">
-                Tu Calaverita
-              </h3>
-              <span className="text-2xl sm:text-3xl">💀</span>
-            </div>
-            <div className="font-display text-sm sm:text-base leading-relaxed text-[#2d1b2e] whitespace-pre-wrap">
-              {formState.generatedCalaverita}
-            </div>
+            {(() => {
+              // Extraer título de la primera línea si empieza con "Calaverita de"
+              const lines = formState.generatedCalaverita.trim().split("\n");
+              const firstLine = lines[0]?.trim() || "";
+              const isCustomTitle = firstLine
+                .toLowerCase()
+                .startsWith("calaverita de");
+              const title = isCustomTitle ? firstLine : "Tu Calaverita";
+              const poemContent = isCustomTitle
+                ? lines.slice(1).join("\n").trim()
+                : formState.generatedCalaverita;
+
+              return (
+                <>
+                  <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                    <span className="text-2xl sm:text-3xl">💀</span>
+                    <h3 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-[#a91a8a]">
+                      {title}
+                    </h3>
+                    <span className="text-2xl sm:text-3xl">💀</span>
+                  </div>
+                  <div className="font-display text-sm sm:text-base leading-relaxed text-[#2d1b2e] whitespace-pre-wrap">
+                    {poemContent}
+                  </div>
+                </>
+              );
+            })()}
           </div>
         )}
       </form>

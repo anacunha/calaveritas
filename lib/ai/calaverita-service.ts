@@ -210,7 +210,12 @@ export class CalaveritaService {
 Rasgos de personalidad: ${traits.join(", ")}
 
 Incorpora tanto las características visuales que observes en la imagen como los rasgos de personalidad proporcionados.
-La calaverita debe ser auténtica, divertida y respetuosa con la tradición mexicana.`,
+La calaverita debe ser auténtica, divertida y respetuosa con la tradición mexicana.
+
+IMPORTANTE:
+1. Responde ÚNICAMENTE con la calaverita (el poema). NO incluyas introducciones como "Aquí está tu calaverita" ni ningún texto adicional.
+2. En la primera línea, escribe SOLO: "Calaverita de [nombre] [adjetivo chistoso]" donde el adjetivo es una descripción corta y graciosa (1-2 palabras máximo) basada en la personalidad o apariencia de la mascota.
+3. Después de esa línea, escribe la calaverita en verso.`,
       },
     ];
   }
