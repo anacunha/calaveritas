@@ -27,7 +27,7 @@ export const bedrock = createAmazonBedrock({
   // Si AWS_ROLE_ARN está definido, usa OIDC; si no, usa credenciales estáticas
   ...(useOIDC
     ? {
-        credentials: awsCredentialsProvider({
+        credentialProvider: awsCredentialsProvider({
           roleArn: process.env.AWS_ROLE_ARN!,
         }),
       }
