@@ -1,5 +1,5 @@
 import { createAmazonBedrock } from "@ai-sdk/amazon-bedrock";
-import { awsCredentialsProvider } from "@vercel/functions/oidc";
+import { awsCredentialsProvider } from "@vercel/oidc-aws-credentials-provider";
 
 /**
  * Configuración de Amazon Bedrock para integración con Claude

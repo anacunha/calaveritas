@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@ai-sdk/amazon-bedrock": "^3.0.48",
-    "@vercel/functions": "^3.1.4",
+    "@vercel/oidc-aws-credentials-provider": "^3.0.3",
     "ai": "^5.0.81",
     "dotenv": "^17.2.3",
     "next": "16.0.0",
